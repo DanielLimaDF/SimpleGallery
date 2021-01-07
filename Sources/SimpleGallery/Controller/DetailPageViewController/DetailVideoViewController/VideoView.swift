@@ -31,13 +31,14 @@ internal class VideoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        loadVideo()
+    internal func loadVideo() {
+        if let url = galleryItem.videoURL {
+            webView.loadVideo(from: url)
+        }
     }
 
-    private func loadVideo() {
-
+    internal func stopVideo() {
+        webView.stopVideo()
     }
 
 }
@@ -66,10 +67,6 @@ extension VideoView: ViewCoding {
         webView.isOpaque = false
         webView.scrollView.bounces = false
         webView.scrollView.isScrollEnabled = false
-
-        if let url = galleryItem.videoURL {
-            webView.loadVideo(from: url)
-        }
     }
 
 }
@@ -80,6 +77,10 @@ internal extension WKWebView {
         if let videoId = getVideoId(from: url) {
             loadHTMLString(getHTMLString(videoId: videoId), baseURL: nil)
         }
+    }
+
+    func stopVideo() {
+        loadHTMLString(String(), baseURL: nil)
     }
 
     private func getHTMLString(videoId: String) -> String {

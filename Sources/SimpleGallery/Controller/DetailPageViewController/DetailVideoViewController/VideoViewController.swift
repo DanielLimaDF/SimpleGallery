@@ -25,8 +25,14 @@ internal class VideoViewController: UIViewController {
         view = VideoView(item: item)
     }
 
-    internal override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        (view as? VideoView)?.loadVideo()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (view as? VideoView)?.stopVideo()
     }
 
 }
