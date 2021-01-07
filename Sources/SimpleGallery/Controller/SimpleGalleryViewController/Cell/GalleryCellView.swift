@@ -51,7 +51,12 @@ extension GalleryCellView: ViewCoding {
 
     func setupConstraints() {
 
-        imageView.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width / 2) - 36, height: (UIScreen.main.bounds.width / 2) - 36)
+        if (UI_USER_INTERFACE_IDIOM() == .pad) {
+            imageView.frame = CGRect(x: 0, y: 0, width: ((UIScreen.main.bounds.width - 160) / 4), height: ((UIScreen.main.bounds.width - 160) / 4))
+        } else {
+            imageView.frame = CGRect(x: 0, y: 0, width: ((UIScreen.main.bounds.width - 40) / 2), height: ((UIScreen.main.bounds.width - 40) / 2))
+        }
+
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
