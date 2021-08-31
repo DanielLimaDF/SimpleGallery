@@ -12,9 +12,11 @@ internal class PictureView: UIView {
 
     let galleryItem: GalleryItem
     let imageView: UIImageView
+    let imageContentMode: UIImageView.ContentMode
 
-    internal init(item: GalleryItem) {
+    internal init(item: GalleryItem, contentMode: UIImageView.ContentMode) {
         galleryItem = item
+        self.imageContentMode = contentMode
         imageView = UIImageView()
         super.init(frame: .zero)
         setupView()
@@ -45,7 +47,7 @@ extension PictureView: ViewCoding {
 
     internal func render() {
         backgroundColor = UIColor(red: 0.20, green: 0.24, blue: 0.35, alpha: 1.00)
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = imageContentMode
         imageView.kf.setImage(with: galleryItem.imageURL)
     }
 

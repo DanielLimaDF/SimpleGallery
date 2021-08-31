@@ -12,12 +12,12 @@ public class SimpleGallery {
 
     internal let galleryViewController: SimpleGalleryViewController
     internal let galleryNavigationController: UINavigationController
+    internal let contentMode: UIImageView.ContentMode
 
-    public init(title: String, pagerColor: UIColor? = nil, selectedPagerColor: UIColor? = nil) {
-        galleryViewController = SimpleGalleryViewController()
+    public init(title: String, pagerColor: UIColor? = nil, selectedPagerColor: UIColor? = nil, galleryImagesContentMode: UIImageView.ContentMode = .scaleAspectFit) {
+        contentMode = galleryImagesContentMode
+        galleryViewController = SimpleGalleryViewController(contentMode: galleryImagesContentMode, pagerColor: pagerColor, selectedPagerColor: selectedPagerColor)
         galleryViewController.title = title
-        galleryViewController.pagerColor = pagerColor
-        galleryViewController.selectedPagerColor = selectedPagerColor
         galleryNavigationController = UINavigationController(rootViewController: galleryViewController)
     }
 
@@ -36,10 +36,10 @@ public class SimpleGallery {
     public func getFullscreenGallery() -> UIViewController {
         
         guard let items = galleryViewController.items else {
-            return DetailPageViewController(items: [], selectedIndex: 0, pagerColor: galleryViewController.pagerColor, selectedPagerColor: galleryViewController.selectedPagerColor)
+            return DetailPageViewController(items: [], selectedIndex: 0, contentMode: contentMode, pagerColor: galleryViewController.pagerColor, selectedPagerColor: galleryViewController.selectedPagerColor)
         }
         
-        let fullscreenGallery = DetailPageViewController(items: items, selectedIndex: 0, pagerColor: galleryViewController.pagerColor, selectedPagerColor: galleryViewController.selectedPagerColor)
+        let fullscreenGallery = DetailPageViewController(items: items, selectedIndex: 0, contentMode: contentMode, pagerColor: galleryViewController.pagerColor, selectedPagerColor: galleryViewController.selectedPagerColor)
         fullscreenGallery.title = galleryViewController.title
         
         return fullscreenGallery

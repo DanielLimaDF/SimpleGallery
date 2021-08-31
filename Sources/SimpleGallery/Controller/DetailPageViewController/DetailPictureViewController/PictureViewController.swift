@@ -11,9 +11,11 @@ import UIKit
 internal class PictureViewController: UIViewController {
 
     let item: GalleryItem
+    let contentMode: UIImageView.ContentMode
 
-    internal init(item: GalleryItem) {
+    internal init(item: GalleryItem, contentMode: UIImageView.ContentMode) {
         self.item = item
+        self.contentMode = contentMode
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -22,7 +24,7 @@ internal class PictureViewController: UIViewController {
     }
 
     internal override func loadView() {
-        view = PictureView(item: item)
+        view = PictureView(item: item, contentMode: contentMode)
     }
 
     internal override func viewDidLoad() {

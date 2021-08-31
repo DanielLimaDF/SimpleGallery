@@ -15,11 +15,11 @@ internal class DetailPageViewController: UIPageViewController {
     var pagerColor: UIColor?
     var selectedPagerColor: UIColor?
 
-    internal init(items: [GalleryItem], selectedIndex: Int, pagerColor: UIColor?, selectedPagerColor: UIColor?) {
+    internal init(items: [GalleryItem], selectedIndex: Int, contentMode: UIImageView.ContentMode, pagerColor: UIColor?, selectedPagerColor: UIColor?) {
         self.pagerColor = pagerColor
         self.selectedPagerColor = selectedPagerColor
         self.presentationIndex = selectedIndex
-        self.viewControllersList = items.map { $0.type == .picture ? PictureViewController(item: $0) : VideoViewController(item: $0) }
+        self.viewControllersList = items.map { $0.type == .picture ? PictureViewController(item: $0, contentMode: contentMode) : VideoViewController(item: $0) }
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         setViewControllers([viewControllersList[selectedIndex]], direction: .forward, animated: true, completion: nil)
     }

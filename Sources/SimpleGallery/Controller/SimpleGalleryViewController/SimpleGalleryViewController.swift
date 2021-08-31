@@ -16,9 +16,21 @@ internal class SimpleGalleryViewController: UIViewController {
         }
     }
     
+    let contentMode: UIImageView.ContentMode
     var pagerColor: UIColor?
     var selectedPagerColor: UIColor?
-
+    
+    required init(contentMode: UIImageView.ContentMode, pagerColor: UIColor?, selectedPagerColor: UIColor?) {
+        self.contentMode = contentMode
+        self.pagerColor = pagerColor
+        self.selectedPagerColor = selectedPagerColor
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     internal override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
@@ -72,7 +84,7 @@ extension SimpleGalleryViewController: SimpleGalleryAdapterDelegate {
             return
         }
 
-        let detailViewController = DetailPageViewController(items: galleryItems, selectedIndex: index, pagerColor: pagerColor, selectedPagerColor: selectedPagerColor)
+        let detailViewController = DetailPageViewController(items: galleryItems, selectedIndex: index, contentMode: contentMode, pagerColor: pagerColor, selectedPagerColor: selectedPagerColor)
         detailViewController.title = title
         navigationController?.pushViewController(detailViewController, animated: true)
 
