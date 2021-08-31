@@ -15,6 +15,9 @@ internal class SimpleGalleryViewController: UIViewController {
             updateItems()
         }
     }
+    
+    var pagerColor: UIColor?
+    var selectedPagerColor: UIColor?
 
     internal override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +72,7 @@ extension SimpleGalleryViewController: SimpleGalleryAdapterDelegate {
             return
         }
 
-        let detailViewController = DetailPageViewController(items: galleryItems, selectedIndex: index)
+        let detailViewController = DetailPageViewController(items: galleryItems, selectedIndex: index, pagerColor: pagerColor, selectedPagerColor: selectedPagerColor)
         detailViewController.title = title
         navigationController?.pushViewController(detailViewController, animated: true)
 

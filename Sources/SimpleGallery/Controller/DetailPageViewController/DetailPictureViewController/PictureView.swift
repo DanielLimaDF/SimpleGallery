@@ -45,7 +45,7 @@ extension PictureView: ViewCoding {
 
     internal func render() {
         backgroundColor = UIColor(red: 0.20, green: 0.24, blue: 0.35, alpha: 1.00)
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.kf.setImage(with: galleryItem.imageURL)
     }
 

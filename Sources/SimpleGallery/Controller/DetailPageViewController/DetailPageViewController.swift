@@ -12,10 +12,14 @@ internal class DetailPageViewController: UIPageViewController {
 
     private let viewControllersList: [UIViewController]
     private let presentationIndex: Int
+    var pagerColor: UIColor?
+    var selectedPagerColor: UIColor?
 
-    internal init(items: [GalleryItem], selectedIndex: Int) {
-        presentationIndex = selectedIndex
-        viewControllersList = items.map { $0.type == .picture ? PictureViewController(item: $0) : VideoViewController(item: $0) }
+    internal init(items: [GalleryItem], selectedIndex: Int, pagerColor: UIColor?, selectedPagerColor: UIColor?) {
+        self.pagerColor = pagerColor
+        self.selectedPagerColor = selectedPagerColor
+        self.presentationIndex = selectedIndex
+        self.viewControllersList = items.map { $0.type == .picture ? PictureViewController(item: $0) : VideoViewController(item: $0) }
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         setViewControllers([viewControllersList[selectedIndex]], direction: .forward, animated: true, completion: nil)
     }
@@ -32,6 +36,13 @@ internal class DetailPageViewController: UIPageViewController {
 
     internal func setupAppearaance() {
         view.backgroundColor = UIColor(red: 0.20, green: 0.24, blue: 0.35, alpha: 1.00)
+        
+        if let pageControlColor = pagerColor, let selectedPageControlColor = selectedPagerColor {
+            let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [DetailPageViewController.self])
+            pageControl.pageIndicatorTintColor = pageControlColor
+            pageControl.currentPageIndicatorTintColor = selectedPageControlColor
+        }
+        
     }
 
 }
